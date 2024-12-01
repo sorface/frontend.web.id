@@ -1,4 +1,4 @@
-# SSO Sorface
+# ID Sorface
 
 ## Установка зависимостей
 
