@@ -1,4 +1,4 @@
-# ID Sorface
+# ID Web Sorface
 
 ## Установка зависимостей
 
