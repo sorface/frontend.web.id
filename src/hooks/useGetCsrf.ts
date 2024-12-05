@@ -1,6 +1,7 @@
-import {useCallback, useReducer} from "react";
-import {REACT_APP_BACKEND_URL} from "../config";
+import { useCallback, useReducer } from "react";
+import { REACT_APP_BACKEND_URL } from "../config";
 import { CsrfToken } from "../types/сsrf";
+import { HttpResponseCode } from "../constants";
 
 interface CsrfConfigState {
     process: {
@@ -26,6 +27,17 @@ type GetCsrfAction = {
 } | {
     name: 'setError';
     payload: string;
+};
+
+const handleUnauthorized = async (response: Response) => {
+    try {
+        const responseJson = await response.json();
+        if (responseJson.authentication) {
+            window.location.href = `oauth2/authorization/passport?redirect-location=${encodeURIComponent(window.location.href)}`;
+            return;
+        }
+    } catch { };
+    window.location.href = 'please-pass-env-variable-for-login-page-url.com';
 };
 
 const getCsrfConfigReducer = (state: CsrfConfigState, action: GetCsrfAction): CsrfConfigState => {
@@ -64,18 +76,21 @@ export const useCsrfApi = () => {
     const [csrfConfigState, dispatch] = useReducer(getCsrfConfigReducer, initialState);
 
     const loadCsrfConfig = useCallback(async () => {
-        dispatch({name: 'startLoad'});
+        dispatch({ name: 'startLoad' });
 
         try {
             const response = await fetch(
                 `${REACT_APP_BACKEND_URL}/api/csrf`,
                 { credentials: 'include' },
             );
+            if (response.status === HttpResponseCode.Unauthorized) {
+                return await handleUnauthorized(response);
+            }
             if (!response.ok) {
                 throw new Error('UserApi error');
             }
             const responseJson = await response.json();
-            dispatch({name: 'setCsrfConfig', payload: responseJson});
+            dispatch({ name: 'setCsrfConfig', payload: responseJson });
         } catch (err: any) {
             dispatch({
                 name: 'setError',
