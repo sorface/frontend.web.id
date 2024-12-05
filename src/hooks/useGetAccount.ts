@@ -1,6 +1,8 @@
 import {useCallback, useReducer} from 'react';
 import {REACT_APP_BACKEND_URL} from '../config';
 import {Account} from '../types/account';
+import { HttpResponseCode } from '../constants';
+import { handleUnauthorized } from '../utils/handleUnauthorized';
 
 interface GetMeState {
     process: {
@@ -72,6 +74,9 @@ export const useGetAccountApi = () => {
                 headers,
                 credentials: 'include'
             });
+            if (response.status === HttpResponseCode.Unauthorized) {
+                return await handleUnauthorized(response);
+            }
             if (!response.ok) {
                 throw new Error('UserApi error');
             }

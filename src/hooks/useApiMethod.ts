@@ -1,6 +1,8 @@
 import { useCallback, useReducer } from 'react';
 import { REACT_APP_BACKEND_URL } from '../config';
 import { ApiContract } from '../types/apiContracts';
+import { HttpResponseCode } from '../constants';
+import { handleUnauthorized } from '../utils/handleUnauthorized';
 
 export interface ApiMethodState<ResponseData = any> {
     process: {
@@ -160,6 +162,9 @@ export const useApiMethod = <ResponseData, RequestData = AnyObject>(apiContractC
             });
 
             const responseData = await getResponseContent(response);
+            if (response.status === HttpResponseCode.Unauthorized) {
+                return await handleUnauthorized(response);
+            }
             if (!response.ok) {
                 const errorMessage = getResponseError(response, responseData, apiContract);
                 throw new Error(errorMessage);

@@ -2,6 +2,7 @@ import { useCallback, useReducer } from "react";
 import { REACT_APP_BACKEND_URL } from "../config";
 import { CsrfToken } from "../types/сsrf";
 import { HttpResponseCode } from "../constants";
+import { handleUnauthorized } from '../utils/handleUnauthorized';
 
 interface CsrfConfigState {
     process: {
@@ -27,17 +28,6 @@ type GetCsrfAction = {
 } | {
     name: 'setError';
     payload: string;
-};
-
-const handleUnauthorized = async (response: Response) => {
-    try {
-        const responseJson = await response.json();
-        if (responseJson.authentication) {
-            window.location.href = `oauth2/authorization/passport?redirect-location=${encodeURIComponent(window.location.href)}`;
-            return;
-        }
-    } catch { };
-    window.location.href = 'please-pass-env-variable-for-login-page-url.com';
 };
 
 const getCsrfConfigReducer = (state: CsrfConfigState, action: GetCsrfAction): CsrfConfigState => {
