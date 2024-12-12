@@ -2,6 +2,7 @@ import {FunctionComponent} from 'react';
 import {Form, FormProps} from '../Form/Form';
 import {Captions} from '../../constants';
 import { ApiEndpoint } from '../../types/apiContracts';
+import { useLogout } from '../../hooks/useLogout';
 
 import './LogoutForm.css';
 
@@ -14,6 +15,8 @@ export const LogoutForm: FunctionComponent<LogoutFormProps> = ({
   submitCaption,
   children,
 }) => {
+  const { logout } = useLogout();
+
   return (
     <Form
       htmlMethod='POST'
@@ -23,6 +26,7 @@ export const LogoutForm: FunctionComponent<LogoutFormProps> = ({
       fieldErrors={{ '': '' }}
       submitCaption={submitCaption ?? Captions.Logout}
       children={children}
+      onSubmit={logout}
     />
   );
 };
