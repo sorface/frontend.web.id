@@ -1,5 +1,7 @@
+import { REACT_APP_LOGIN_URL } from '../config';
+
 const redirectToLogin = () => {
-  window.location.href = 'please-pass-env-variable-for-login-page-url';
+  window.location.href = REACT_APP_LOGIN_URL;
 };
 
 export const handleUnauthorized = async (response: Response) => {
