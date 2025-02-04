@@ -1,5 +1,5 @@
 import { useCallback, useReducer } from 'react';
-import { REACT_APP_BACKEND_URL } from '../config';
+import { REACT_APP_PASSPORT_URL } from '../config';
 import { ApiContract } from '../types/apiContracts';
 import { HttpResponseCode } from '../constants';
 import { handleUnauthorized } from '../utils/handleUnauthorized';
@@ -94,9 +94,9 @@ const createFetchUrl = (apiContract: ApiContract, additionalUrlParams?: object) 
                     return createUrlParam(paramName, paramValue);
                 })
                 .join('&');
-        return `${REACT_APP_BACKEND_URL}${apiContract.baseUrl}?${params}`;
+        return `${REACT_APP_PASSPORT_URL}${apiContract.baseUrl}?${params}`;
     }
-    return `${REACT_APP_BACKEND_URL}${apiContract.baseUrl}`;
+    return `${REACT_APP_PASSPORT_URL}${apiContract.baseUrl}`;
 };
 
 const createFetchRequestInit = (apiContract: ApiContract): RequestInit => {

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useReducer } from 'react';
-import { REACT_APP_BACKEND_URL } from '../config';
-import { ApiEndpoint } from '../types/apiContracts';
+import {REACT_APP_GATEWAY_URL} from "../config";
+import {ApiEndpoint} from "../types/apiContracts";
 
 interface LogoutState {
   process: {
@@ -82,7 +82,7 @@ export const useLogout = () => {
   const logout = useCallback(async () => {
     dispatch({ name: 'startLoad' });
     try {
-      const response = await fetch(`${REACT_APP_BACKEND_URL}${ApiEndpoint.AccountsLogout}`, {
+      const response = await fetch(`${REACT_APP_GATEWAY_URL}${ApiEndpoint.AccountsLogout}`, {
         method: 'POST',
         credentials: 'include',
       });

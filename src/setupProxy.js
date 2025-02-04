@@ -15,4 +15,11 @@ module.exports = function (app) {
             changeOrigin: true,
         })
     );
+    app.use(
+        '/logout',
+        createProxyMiddleware({
+            target: 'http://localhost:9000',
+            changeOrigin: true,
+        })
+    );
 };

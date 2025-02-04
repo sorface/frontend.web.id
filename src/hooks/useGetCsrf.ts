@@ -1,5 +1,5 @@
 import { useCallback, useReducer } from "react";
-import { REACT_APP_BACKEND_URL } from "../config";
+import { REACT_APP_PASSPORT_URL } from "../config";
 import { CsrfToken } from "../types/сsrf";
 import { HttpResponseCode } from "../constants";
 import { handleUnauthorized } from '../utils/handleUnauthorized';
@@ -70,9 +70,10 @@ export const useCsrfApi = () => {
 
         try {
             const response = await fetch(
-                `${REACT_APP_BACKEND_URL}/api/csrf`,
+                `${REACT_APP_PASSPORT_URL}/api/csrf`,
                 { credentials: 'include' },
             );
+            console.log(response);
             if (response.status === HttpResponseCode.Unauthorized) {
                 return await handleUnauthorized(response);
             }

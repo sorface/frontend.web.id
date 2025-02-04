@@ -9,7 +9,7 @@ export enum ApiEndpoint {
     AccountsCurrent = '/api/accounts/current',
     AccountsConfirm = '/api/account/confirm',
     AccountsEdit = '/api/accounts/:id',
-    AccountsLogout = '/api/accounts/logout',
+    AccountsLogout = '/logout',
     CurrentSession = '/api/sessions',
 }
 

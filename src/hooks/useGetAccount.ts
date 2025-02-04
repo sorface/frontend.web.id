@@ -1,5 +1,5 @@
 import {useCallback, useReducer} from 'react';
-import {REACT_APP_BACKEND_URL} from '../config';
+import {REACT_APP_PASSPORT_URL} from '../config';
 import {Account} from '../types/account';
 import { HttpResponseCode } from '../constants';
 import { handleUnauthorized } from '../utils/handleUnauthorized';
@@ -70,7 +70,7 @@ export const useGetAccountApi = () => {
         const headers = new Headers();
 
         try {
-            const response = await fetch(`${REACT_APP_BACKEND_URL}/api/accounts/current`, {
+            const response = await fetch(`${REACT_APP_PASSPORT_URL}/api/accounts/current`, {
                 headers,
                 credentials: 'include'
             });
