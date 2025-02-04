@@ -12,4 +12,3 @@ export const REACT_APP_PASSPORT_URL = REACT_APP_GATEWAY_URL + getFromEnv('REACT_
 
 export const REACT_APP_VERSION = getFromEnv('REACT_APP_VERSION');
 
-export const REACT_APP_LOGIN_URL = getFromEnv('REACT_APP_LOGIN_URL');
