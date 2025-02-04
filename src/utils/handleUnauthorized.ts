@@ -10,9 +10,8 @@ export const handleUnauthorized = async (response: Response) => {
       console.log('Access denied');
     }
 
-    const responseJson = await response.json();
-
     window.location.href = `${REACT_APP_GATEWAY_URL}/oauth2/authorization/passport?redirect-location=${encodeURIComponent(window.location.href)}`;
+
     return;
   } catch { }
 };
