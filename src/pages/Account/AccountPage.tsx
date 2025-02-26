@@ -10,6 +10,7 @@ import {UserAvatar} from '../../components/UserAvatar/UserAvatar';
 import {getUserAvatarCaption} from '../../utils/getUserAvatarCaption';
 
 import './Account.css';
+import {AccountRole, roleConverter} from "../../types/account";
 
 interface ProfileField {
     name: string;
@@ -46,7 +47,6 @@ export const AccountPage: FunctionComponent = () => {
     }, [data, loadAccount]);
 
     useEffect(() => {
-        console.log('pre', apiMethodState.data);
         if (apiMethodState.data == null) {
             return;
         }
@@ -64,15 +64,6 @@ export const AccountPage: FunctionComponent = () => {
             id: account.id,
             [editedFieldName]: editedFieldValue,
         });
-    };
-
-    const convertRole = (role: string): string | undefined => {
-        let mapRole: Map<string, string> = new Map<string, string>()
-
-        mapRole.set("ADMIN", "Admin");
-        mapRole.set("USER", "User");
-
-        return mapRole.get(role);
     };
 
     const fields: ProfileField[] = [
@@ -109,7 +100,7 @@ export const AccountPage: FunctionComponent = () => {
         {
             name: 'roles',
             caption: Captions.Roles,
-            value: account?.roles?.map(role => convertRole(role)).join(','),
+            value: account?.roles?.map(role => role).join(', '),
             editable: false,
         },
     ];

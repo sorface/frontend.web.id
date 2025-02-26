@@ -57,7 +57,7 @@ function App() {
                     <Menu/>
                     <div className="App">
                         <div className="App-content">
-                            <AppRoutes/>
+                            <AppRoutes account={account} />
                         </div>
                         <Footer version={REACT_APP_BUILD_HASH}/>
                     </div>

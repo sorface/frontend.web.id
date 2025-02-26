@@ -9,10 +9,17 @@ import {ProtectedRoute} from './ProtectedRoute';
 import {Clients} from '../pages/Clients/Clients';
 import {ClientsEdit} from '../pages/ClientsEdit/ClientsEdit';
 import {ClientsAdd} from '../pages/ClientsAdd/ClientsAdd';
+import {Account} from "../types/account";
 
-export const AppRoutes: FunctionComponent = () => {
-    const { account } = useContext(AuthContext);
+interface AppRoutesProps {
+    account: Account | null;
+}
+
+export const AppRoutes: FunctionComponent<AppRoutesProps> = ({
+                                                 account
+                                             }) => {
     const authenticated = !!account;
+
     const authenticatedRouteProps = {
         allowed: authenticated,
         redirect: pathnames.signIn,

@@ -38,7 +38,7 @@ export const ClientsEdit: FunctionComponent = () => {
     const {
         apiMethodState: deleteApiMethodState,
         fetchData: deleteFetch,
-    } = useApiMethod<unknown, string>(appsApiDeclaration.deleteById);
+    } = useApiMethodCsrf<unknown, string>(appsApiDeclaration.deleteById);
 
     const {
         data: deletedApp,
@@ -119,7 +119,7 @@ export const ClientsEdit: FunctionComponent = () => {
             <h3>{Captions.EditClient}</h3>
             <div className='client-edit-body'>
                 {loadintTotal && <Loader />}
-                {!!errorTotal && <div>{Captions.Error}: {errorTotal}</div>}
+                {!!errorTotal && <div>{errorTotal}</div>}
                 {!!data && (
                     <Form
                         styled
