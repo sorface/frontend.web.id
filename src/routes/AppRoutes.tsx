@@ -1,6 +1,5 @@
-import React, {FunctionComponent, useContext} from 'react';
+import React, {FunctionComponent} from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom';
-import {AuthContext} from '../context/AuthContext';
 import {pathnames} from '../constants';
 import {AccountPage} from '../pages/Account/AccountPage';
 import {NotFound} from '../pages/NotFound/NotFound';
@@ -16,8 +15,8 @@ interface AppRoutesProps {
 }
 
 export const AppRoutes: FunctionComponent<AppRoutesProps> = ({
-                                                 account
-                                             }) => {
+                                                                 account
+                                                             }) => {
     const authenticated = !!account;
 
     const authenticatedRouteProps = {
