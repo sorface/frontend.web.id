@@ -11,6 +11,8 @@ import {getUserAvatarCaption} from '../../utils/getUserAvatarCaption';
 
 import './Account.css';
 import {AccountRole} from "../../types/account";
+import {ApiEndpoint} from "../../types/apiContracts";
+import {REACT_APP_GATEWAY_URL} from "../../config";
 
 interface ProfileField {
     name: string;
@@ -147,6 +149,10 @@ export const AccountPage: FunctionComponent = () => {
                 ))}
             </table>
             <LogoutForm/>
+            {/*TODO: костыль для пробы*/}
+            <form method={'POST'} action={`${REACT_APP_GATEWAY_URL}${ApiEndpoint.AccountsLogout}`}>
+                <input type={'submit'} value={'FORM logout'}/>
+            </form>
         </div>
     );
 };
