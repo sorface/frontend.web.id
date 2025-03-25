@@ -10,7 +10,7 @@ import {UserAvatar} from '../../components/UserAvatar/UserAvatar';
 import {getUserAvatarCaption} from '../../utils/getUserAvatarCaption';
 
 import './Account.css';
-import {AccountRole, roleConverter} from "../../types/account";
+import {AccountRole} from "../../types/account";
 
 interface ProfileField {
     name: string;
@@ -66,6 +66,10 @@ export const AccountPage: FunctionComponent = () => {
         });
     };
 
+    const convertRole = (role: AccountRole): string => {
+        return AccountRole[role.toString() as keyof typeof AccountRole];
+    };
+
     const fields: ProfileField[] = [
         {
             name: 'id',
@@ -100,7 +104,7 @@ export const AccountPage: FunctionComponent = () => {
         {
             name: 'roles',
             caption: Captions.Roles,
-            value: account?.roles?.map(role => role).join(', '),
+            value: account?.roles?.map(role => convertRole(role)).join(', '),
             editable: false,
         },
     ];

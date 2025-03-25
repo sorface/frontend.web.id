@@ -1,7 +1,13 @@
 import { Account, AccountRole } from '../types/account';
 
-export const checkAdmin = (account: Account | null) => {
-    console.log('Роли: ', account?.roles, ' is admin ', !!account?.roles.find(role => Object.values(AccountRole).includes(role)))
+export const getAccountRoleName = Object.keys(AccountRole)
+    .filter((v) => isNaN(Number(v)))
+    .map((name) => {
+        return {
+            id: AccountRole[name as keyof typeof AccountRole],
+            name,
+        };
+    });
 
-    return !!account && !!account.roles.find(role => Object.values(AccountRole).includes(role));
-}
+export const checkAdmin = (account: Account | null) =>
+  !!account && account.roles.includes(AccountRole.ROLE_ADMIN);

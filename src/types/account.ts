@@ -1,8 +1,6 @@
-import {Captions} from "../constants";
-
 export enum AccountRole {
-  ROLE_ADMIN,
-  ROLE_USER
+  ROLE_ADMIN= "Администратор",
+  ROLE_USER= "Пользователь"
 }
 
 export interface Account {
@@ -12,14 +10,5 @@ export interface Account {
   firstName?: string;
   lastName?: string;
   avatar: string;
-  roles: string[];
-}
-
-const roleDictionary = {
-  0: Captions.RoleAdmin,
-  1: Captions.RoleUser
-}
-
-export const roleConverter = (role: AccountRole): string => {
-  return roleDictionary[role]
+  roles: AccountRole[];
 }
