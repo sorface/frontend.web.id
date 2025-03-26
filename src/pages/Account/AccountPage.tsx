@@ -2,7 +2,6 @@ import React, {ChangeEvent, FunctionComponent, useContext, useEffect, useState} 
 import {Captions, IconNames} from "../../constants";
 import {Icon} from '../../components/Icon/Icon';
 import {AuthContext} from '../../context/AuthContext';
-import {LogoutForm} from '../../components/LogoutForm/LogoutForm';
 import {useApiMethodCsrf} from '../../hooks/useApiMethodCsrf';
 import {accountsApiDeclaration, EditAccountBody} from '../../apiDeclarations';
 import {Loader} from '../../components/Loader/Loader';
@@ -12,7 +11,7 @@ import {getUserAvatarCaption} from '../../utils/getUserAvatarCaption';
 import './Account.css';
 import {AccountRole} from "../../types/account";
 import {ApiEndpoint} from "../../types/apiContracts";
-import {REACT_APP_GATEWAY_URL} from "../../config";
+import {REACT_APP_GATEWAY_URL, REACT_APP_POST_LOGOUT_REDIRECT_URL} from "../../config";
 
 interface ProfileField {
     name: string;
@@ -148,10 +147,9 @@ export const AccountPage: FunctionComponent = () => {
                     </tr>
                 ))}
             </table>
-            <LogoutForm/>
-            {/*TODO: костыль для пробы*/}
-            <form method={'POST'} action={`${REACT_APP_GATEWAY_URL}${ApiEndpoint.AccountsLogout}`}>
-                <input type={'submit'} value={'FORM logout'}/>
+            <form method={'POST'}
+                  action={`${REACT_APP_GATEWAY_URL}${ApiEndpoint.AccountsLogout}?redirect-location=${encodeURIComponent(REACT_APP_POST_LOGOUT_REDIRECT_URL)}`}>
+                <input type={'submit'} value={'Выйти'}/>
             </form>
         </div>
     );
