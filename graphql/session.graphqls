@@ -1,0 +1,19 @@
+type Session {
+    id: String
+    device: String
+    deviceBrand: String
+    deviceType: String
+    browser: String
+    createdAt: Long
+    lastAccessTime: Long
+    active: Boolean
+}
+
+type UserSession {
+    id: String
+    device: String
+    deviceBrand: String
+    deviceType: String
+    browser: String
+    createdAt: Long
+}
