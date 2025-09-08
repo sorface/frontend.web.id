@@ -4,13 +4,11 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
-    jest: true,
   },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:jsx-a11y/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -22,16 +20,13 @@ module.exports = {
   plugins: [
     'react',
     'react-hooks',
-    'jsx-a11y',
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
-    'no-unused-vars': 'warn',
-    'jsx-a11y/anchor-is-valid': 'off',
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'no-console': 'warn',
     'no-debugger': 'error',
-    'react/no-unescaped-entities': 'warn',
   },
   settings: {
     react: {
@@ -43,5 +38,6 @@ module.exports = {
     'dist/',
     'node_modules/',
     '*.config.js',
+    '*.config.cjs',
   ],
 };

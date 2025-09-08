@@ -3,24 +3,18 @@ import {
   Box,
   Typography,
   Avatar,
-  Button,
-  Paper,
-  Chip,
   Card,
   CardContent
 } from '@mui/material';
 import {
-  Security,
   Devices,
-  Apps,
-  EditOutlined
+  Apps
 } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { config } from '../config/env';
 
 const HomePage = () => {
-  const { user, isAuthenticated, isAdmin } = useAuth();
+  const { user, isAdmin } = useAuth();
   const navigate = useNavigate();
 
   return (
