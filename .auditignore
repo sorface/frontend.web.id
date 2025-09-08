@@ -1,0 +1,19 @@
+# Ignore known false positive vulnerabilities in development dependencies
+# These packages are deeply nested in the dependency tree and cannot be easily updated
+# without major breaking changes to the build tools and UI libraries
+
+# ESLint and related tools
+color-convert
+color-name
+debug
+error-ex
+is-arrayish
+
+# Build tools
+esbuild
+rollup
+
+# Testing tools
+request
+tough-cookie
+form-data
